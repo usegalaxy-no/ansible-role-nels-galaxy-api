@@ -37,6 +37,14 @@
         group: "{{tos_api_user}}"
         mode: 0755
 
+    - name: tos-api systemd file
+      template:
+        src: "{{tos_api_systemd}}"
+        dest: /etc/systemd/system/tos_api.service
+      register: tos_api_systemd
+
+
+
     - name: reload tos-api.system file
       systemd:
         state: restarted

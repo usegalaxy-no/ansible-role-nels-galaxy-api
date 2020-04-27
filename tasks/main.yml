@@ -1,0 +1,62 @@
+---
+# tasks file for ansible-role-tos-api
+- name: Install and cofigure ehos-head node
+
+  block:
+
+    - name: Create tos_api group
+      user:
+        name: "{{tos_api_user}}"
+
+    - name: Create tos_api user
+      user:
+        name: "{{tos_api_user}}"
+        group: "{{tos_api_user}}"
+
+    - name: change group owner of /usr/local
+      file:
+        dest: /usr/local/
+        group: adm
+        recurse: yes
+
+    - name: change permission of /usr/local/etc
+      file:
+        dest: /usr/local/etc
+        group: adm
+        mode: 0775
+
+    - name: create deployment directory
+      file:
+        path: "{{ tos_api_root }}"
+        state: directory
+        owner: "{{ tos_api_user }}"
+        group: "{{ tos_api_group }}"
+        mode: 0755
+
+    - name: install tos-api latest
+      command: pip3 install --upgrade --prefix=/usr/local/ git+https://github.com/usegalaxy-no/tos-api.git
+      when: tos_api_version == 'development'
+
+    - name: install tos-api {{tos_api_version }}
+      command: pip3 install --prefix=/usr/local/ https://github.com/usegalaxy-no/tos-api/archive/v{{tos_api_version}}.tar.gz
+      when: tos_api_version != 'development'
+
+    - name: setup log dir for tos-api
+      file:
+        path: "{{ tos_api_log_dir }}"
+        state: directory
+        owner: "{{tos_api_user}}"
+        group: "{{tos_api_user}}"
+        mode: 0755
+
+    - name: reload tos-api.system file
+      systemd:
+        state: restarted
+        daemon_reload: yes
+        name: ehos
+      when: tos_api_systemd.changed
+
+    - name: Make sure tos-api is running
+      systemd:
+        state: started
+        name: tos-api

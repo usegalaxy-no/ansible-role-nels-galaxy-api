@@ -3,9 +3,10 @@
 tos_api_user: tos_api
 tos_api_group: tos_api
 tos_api_version: development
-tos_api_root: /srv/tos_api
-galaxy_config_file:
+tos_api_root: /srv/tos-api
+# Need to set: galaxy_config_file
 tos_api_port: 8081
-tos_api_log_dir: /var/log/tos_api/
-tos_api_systemd: templates/tos_api.service.j2
+tos_api_log_dir: /var/log/tos-api/
+
+tos_api_systemd: templates/tos-api.service.j2
 

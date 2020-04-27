@@ -13,19 +13,7 @@
         name: "{{tos_api_user}}"
         group: "{{tos_api_user}}"
 
-    - name: change group owner of /usr/local
-      file:
-        dest: /usr/local/
-        group: adm
-        recurse: yes
-
-    - name: change permission of /usr/local/etc
-      file:
-        dest: /usr/local/etc
-        group: adm
-        mode: 0775
-
-    - name: create deployment directory
+    - name: create {{ tos_api_root }} deployment directory
       file:
         path: "{{ tos_api_root }}"
         state: directory

@@ -1,12 +1,16 @@
 Role Name
 =========
 
-Ansible role for installing tos-api (https://www.github.com/usegalaxy-no/tos-api/)
+Ansible role for installing nels-galaxy-api (https://www.github.com/usegalaxy-no/nels-galaxy-api/)
+
+**Currently broken do not use**
+
 
 in requirements:
 
-    - src: https://github.com/usegalaxy-no/ansible-role-tos-api.git
-      name: usegalaxy-no.tos-api
+    - src: https://github.com/usegalaxy-no/ansible-role-nels-galaxy-api.git
+      name: usegalaxy-no.nels-galaxy-api
+
 
 
 Requirements
@@ -32,8 +36,13 @@ Including an example of how to use your role (for instance, with variables passe
       become: true
       vars:
         galaxy_config_file: /srv/galaxy/config/galaxy.yml
+        nels_galaxy_key: super-secret-key
+        proxy_keys: {'key_for_incoming_proxy1': 'galaxy-1.bioinfo.no',
+                     'key_for_incoming_proxy2': 'galaxy-2.bioinfo.no'}
+
+
       roles:
-        - usegalaxy-no.tos-api
+        - usegalaxy-no.nels-galaxy-api
 
 License
 -------

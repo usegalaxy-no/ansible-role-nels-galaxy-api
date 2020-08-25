@@ -1,12 +1,17 @@
 ---
-# defaults file for ansible-role-tos-api
-tos_api_user: tos_api
-tos_api_group: tos_api
-tos_api_version: development
-tos_api_root: /srv/tos-api
+# defaults file for ansible-role-nels-galaxy-api
+nels_galaxy_api_user: galaxy
+nels_galaxy_api_group: galaxy
+nels_galaxy_api_root: /srv/nels-galaxy-api
+nels_galaxy_config: nels-galaxy-api.yml
 # Need to set: galaxy_config_file
-tos_api_port: 8081
-tos_api_log_dir: /var/log/tos-api/
+#              nels_galaxy_key
 
-tos_api_systemd: templates/tos-api.service.j2
+#proxy_keys: {'key_proxy1': 'galaxy-1.bioinfo.no',
+#             'key_proxy2': 'galaxy-2.bioinfo.no'}
+
+nels_galaxy_api_port: 8008
+nels_galaxy_api_log_dir: /var/log/nels-galaxy-api/
+
+nels_galaxy_api_systemd: templates/nels-galaxy-api.service.j2
 

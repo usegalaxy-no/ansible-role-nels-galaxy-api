@@ -1,6 +1,6 @@
 galaxy_info:
   author: Kim Brugger
-  description: Install the tos-api for galaxy
+  description: Install the nels-galaxy-api for galaxy
   company: Elixir Norway/University of Bergen
 
   license: MIT

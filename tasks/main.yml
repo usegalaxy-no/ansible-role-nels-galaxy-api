@@ -1,75 +1,75 @@
 ---
-# tasks file for ansible-role-tos-api
-- name: Install and cofigure ehos-head node
+# tasks file for ansible-role-nels-galaxy-api
+- name: Install and cofigure nels-galaxy software
 
   block:
 
-    - name: Create tos_api group
+    - name: Create nels_galaxy_api group
       user:
-        name: "{{tos_api_user}}"
+        name: "{{nels_galaxy_user}}"
 
-    - name: Create tos_api user
+    - name: Create nels_galaxy_api user
       user:
-        name: "{{tos_api_user}}"
-        group: "{{tos_api_user}}"
+        name: "{{nels_galaxy_user}}"
+        group: "{{nels_galaxy_user}}"
 
-    - name: create {{ tos_api_root }} deployment directory
+    - name: create {{ nels_galaxy_api_root }} deployment directory
       file:
-        path: "{{ tos_api_root }}"
+        path: "{{ nels_galaxy_api_root }}"
         state: directory
-        owner: "{{ tos_api_user }}"
-        group: "{{ tos_api_group }}"
+        owner: "{{ nels_galaxy_api_user }}"
+        group: "{{ nels_galaxy_api_group }}"
         mode: 0755
 
-    - name: create venv in {{ tos_api_root }}
+    - name: create venv in {{ os_api_root }}
       become: true
-      become_user: "{{ tos_api_user }}"
+      become_user: "{{ nels_galaxy_api_user }}"
       command:
-        chdir: "{{  tos_api_root }}"
+        chdir: "{{  nels_galaxy_api_root }}"
         cmd: python3 -m venv venv
-        creates: "{{  tos_api_root }}/venv"
+        creates: "{{  nels_galaxy_api_root }}/venv"
 
 
-    - name: install tos-api latest
+    - name: install nels-galaxy-api latest
       become: true
-      become_user: "{{ tos_api_user }}"
+      become_user: "{{ nels_galaxy_api_user }}"
       pip:
-        name: git+https://github.com/usegalaxy-no/tos-api.git
+        name: git+https://github.com/usegalaxy-no/nels-galaxy-api.git
         extra_args: --upgrade
-        virtualenv: "{{ tos_api_root }}/venv/"
-      when: tos_api_version == 'development'
+        virtualenv: "{{ nels_galaxy_api_root }}/venv/"
+      when: nels_galaxy_api_version == 'development'
 
-    - name: install tos-api {{tos_api_version }}
+    - name: install nels-galaxy-api {{nels_galaxy_api_version }}
       become: true
-      become_user: "{{ tos_api_user }}"
+      become_user: "{{ nels_galaxy_api_user }}"
       pip:
-        name: https://github.com/usegalaxy-no/tos-api/archive/v{{tos_api_version}}.tar.gz
+        name: https://github.com/usegalaxy-no/nels-galaxy-api/archive/v{{nels_galaxy_api_version}}.tar.gz
         extra_args: --upgrade
-        virtualenv: "{{ tos_api_root }}/venv/"
-      when: tos_api_version != 'development'
+        virtualenv: "{{ nels_galaxy_api_root }}/venv/"
+      when: nels_galaxy_api_version != 'development'
 
-    - name: setup log dir for tos-api
+    - name: setup log dir for nels-galaxy-api
       file:
-        path: "{{ tos_api_log_dir }}"
+        path: "{{ nels_galaxy_api_log_dir }}"
         state: directory
-        owner: "{{tos_api_user}}"
-        group: "{{tos_api_user}}"
+        owner: "{{nels_galaxy_api_user}}"
+        group: "{{nels_galaxy_api_user}}"
         mode: 0755
 
-    - name: tos-api systemd file
+    - name: nels-galaxy-api systemd file
       template:
-        src: "{{tos_api_systemd}}"
-        dest: /etc/systemd/system/tos-api.service
-      register: tos_api_systemd
+        src: "{{nels_galaxy_api_systemd}}"
+        dest: /etc/systemd/system/nels-galaxy-api.service
+      register: nels_galaxy_api_systemd
 
-    - name: reload tos-api.system file
+    - name: reload nels-galaxy-api.system file
       systemd:
         state: restarted
         daemon_reload: yes
-        name: tos-api
-      when: tos_api_systemd.changed
+        name: nels-galaxy-api
+      when: nels_galaxy_api_systemd.changed
 
-    - name: Make sure tos-api is running
+    - name: Make sure nels-galaxy-api is running
       systemd:
         state: started
-        name: tos-api
+        name: nels-galaxy-api

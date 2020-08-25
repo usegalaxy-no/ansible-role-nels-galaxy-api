@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - ansible-role-tos-api
+    - ansible-role-nels-galaxy-api

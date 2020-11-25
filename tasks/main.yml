@@ -6,47 +6,33 @@
 
     - name: Create nels_galaxy_api group
       user:
-        name: "{{nels_galaxy_user}}"
+        name: "{{nels_galaxy_api_group}}"
 
     - name: Create nels_galaxy_api user
       user:
-        name: "{{nels_galaxy_user}}"
-        group: "{{nels_galaxy_user}}"
+        name: "{{nels_galaxy_api_user}}"
+        group: "{{nels_galaxy_api_group}}"
 
-    - name: create {{ nels_galaxy_api_root }} deployment directory
-      file:
-        path: "{{ nels_galaxy_api_root }}"
-        state: directory
-        owner: "{{ nels_galaxy_api_user }}"
-        group: "{{ nels_galaxy_api_group }}"
-        mode: 0755
+    - name: Install Dependencies (for kbr-tools)
+      package:
+        name:
+          - "gcc"
 
-    - name: create venv in {{ os_api_root }}
-      become: true
-      become_user: "{{ nels_galaxy_api_user }}"
+    - name: Git checkout of nels-galaxy-api
+      git:
+        repo: 'https://github.com/usegalaxy-no/nels-galaxy-api.git'
+        dest: "{{ nels_galaxy_api_root }}"
+
+    - name: create venv in {{ nels_galaxy_api_root }}
       command:
         chdir: "{{  nels_galaxy_api_root }}"
         cmd: python3 -m venv venv
         creates: "{{  nels_galaxy_api_root }}/venv"
 
-
-    - name: install nels-galaxy-api latest
-      become: true
-      become_user: "{{ nels_galaxy_api_user }}"
+    - name: Install specified python requirements for nels-galaxy-api
       pip:
-        name: git+https://github.com/usegalaxy-no/nels-galaxy-api.git
-        extra_args: --upgrade
-        virtualenv: "{{ nels_galaxy_api_root }}/venv/"
-      when: nels_galaxy_api_version == 'development'
-
-    - name: install nels-galaxy-api {{nels_galaxy_api_version }}
-      become: true
-      become_user: "{{ nels_galaxy_api_user }}"
-      pip:
-        name: https://github.com/usegalaxy-no/nels-galaxy-api/archive/v{{nels_galaxy_api_version}}.tar.gz
-        extra_args: --upgrade
-        virtualenv: "{{ nels_galaxy_api_root }}/venv/"
-      when: nels_galaxy_api_version != 'development'
+        requirements: "{{  nels_galaxy_api_root }}/requirements.txt"
+        virtualenv: "{{  nels_galaxy_api_root }}/venv"
 
     - name: setup log dir for nels-galaxy-api
       file:
@@ -56,20 +42,25 @@
         group: "{{nels_galaxy_api_user}}"
         mode: 0755
 
-    - name: nels-galaxy-api systemd file
+
+    - name: Create config file from template
       template:
-        src: "{{nels_galaxy_api_systemd}}"
-        dest: /etc/systemd/system/nels-galaxy-api.service
-      register: nels_galaxy_api_systemd
+        src: templates/nga-server.json.j2
+        dest: "{{  nels_galaxy_api_root }}/nga-server.json"
+        owner: root
+        group: root
+        mode: '0644'
 
-    - name: reload nels-galaxy-api.system file
-      systemd:
-        state: restarted
-        daemon_reload: yes
-        name: nels-galaxy-api
-      when: nels_galaxy_api_systemd.changed
+    - name: Create job-config file from template
+      template:
+        src: templates/jobs.json.j2
+        dest: "{{  nels_galaxy_api_root }}/jobs.json"
+        owner: "{{nels_galaxy_api_user}}"
+        group: "{{nels_galaxy_api_group}}"
+        mode: '0644'
 
-    - name: Make sure nels-galaxy-api is running
-      systemd:
-        state: started
-        name: nels-galaxy-api
+    - name: Start nels-galaxy-api
+      command:
+        chdir: "{{nels_galaxy_api_root}}"
+        cmd: "./venv/bin/kbr-job-manager.py -C jobs.json  --daemon-restart"
+

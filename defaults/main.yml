@@ -3,15 +3,41 @@
 nels_galaxy_api_user: galaxy
 nels_galaxy_api_group: galaxy
 nels_galaxy_api_root: /srv/nels-galaxy-api
-nels_galaxy_config: nels-galaxy-api.yml
-# Need to set: galaxy_config_file
-#              nels_galaxy_key
-
-#proxy_keys: {'key_proxy1': 'galaxy-1.bioinfo.no',
-#             'key_proxy2': 'galaxy-2.bioinfo.no'}
-
+nels_galaxy_config: nga.json
+nels_galaxy_tmp_dir: "/srv/tmp/"
 nels_galaxy_api_port: 8008
 nels_galaxy_api_log_dir: /var/log/nels-galaxy-api/
+nels_galaxy_api_runners: 2
+galaxy_config: "/srv/galaxy/config/galaxy.yml"
+nga_tmp_dir: /srv/tmp/
 
-nels_galaxy_api_systemd: templates/nels-galaxy-api.service.j2
+
+# Need to set and is generally sat elsewhere in the usegalxy-no playbooks:
+#"nels_storage_client_key":
+#"nels_storage_client_secret":
+#"nels_url":
+#"nels_storage_url":
+# nga_master_galaxy_url:
+# nga_master_url:
+
+# nga_rabbitmq:
+#"id": "{{nga_master_id}}",
+#  "key": "{{nga_master_key}}",
+#  "port": "{{nels_galaxy_api_port}}",
+#  "galaxy_url": "https://{{nga_domain}}/",
+#  "master_url": "https://{{nga_domain}}/nga",
+#  "proxy_key": "{{nga_master_proxy_key}}",
+# {{nga_instance}}: {
+  #    "{instance_id}": {
+  #      "name": "{instance_name}",
+  #      "url": "{instance_url}",
+  #      "api_key": "{instnace_api_key}",
+  #      "nga_url": "{nga_url",
+  #      "nga_key": "{nga_key}",
+  #      "contact_email": "admin@usegalaxy.no",
+  #      "proxy_key": "{nga_proxy_key}",
+  #      "active": true
+#    },
+#  },
+
 

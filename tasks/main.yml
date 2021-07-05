@@ -68,7 +68,7 @@
         start: started
         enabled: yes
         name: nga-master
-   
+
     - name: start and enable nga runner 1
       systemd:
         daemon_reload: yes

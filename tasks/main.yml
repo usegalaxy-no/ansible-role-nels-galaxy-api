@@ -5,7 +5,7 @@
   block:
 
     - name: Create nels_galaxy_api group
-      user:
+      group:
         name: "{{nels_galaxy_api_group}}"
 
     - name: Create nels_galaxy_api user
@@ -16,12 +16,18 @@
     - name: Install Dependencies (for kbr-tools)
       package:
         name:
-          - "gcc"
+          - postgresql.x86_64
+          - postgresql-devel.x86_64
+          - gcc
+        state: present
+
 
     - name: Git checkout of nels-galaxy-api
       git:
         repo: 'https://github.com/usegalaxy-no/nels-galaxy-api.git'
         dest: "{{ nels_galaxy_api_root }}"
+        version: master
+
 
     - name: create venv in {{ nels_galaxy_api_root }}
       command:
@@ -46,21 +52,40 @@
     - name: Create config file from template
       template:
         src: templates/nga-server.json.j2
-        dest: "{{  nels_galaxy_api_root }}/nga-server.json"
+        dest: "{{  nels_galaxy_api_root }}/{{ nels_galaxy_config}}"
         owner: root
         group: root
         mode: '0644'
 
-    - name: Create job-config file from template
+    - name: copy systemd unit files
       template:
-        src: templates/jobs.json.j2
-        dest: "{{  nels_galaxy_api_root }}/jobs.json"
-        owner: "{{nels_galaxy_api_user}}"
-        group: "{{nels_galaxy_api_group}}"
-        mode: '0644'
+        src: "{{ item.0 }}"
+        dest: "{{ item.1 }}"
+        owner: root
+        group: root
+        mode: 0644
+      with_together:
+        - ['nga-master.systemd.j2', 'nga-runner.systemd.j2']
+        - ['/usr/lib/systemd/system/nga-master.service', '/usr/lib/systemd/system/nga-runner@.service']
 
-    - name: Start nels-galaxy-api
-      command:
-        chdir: "{{nels_galaxy_api_root}}"
-        cmd: "./venv/bin/kbr-job-manager.py -C jobs.json  --daemon-restart"
+    - name: start and enable nga master
+      systemd:
+        daemon_reload: yes
+        state: started
+        enabled: yes
+        name: nga-master
+
+    - name: start and enable nga runner 1
+      systemd:
+        daemon_reload: yes
+        state: started
+        enabled: yes
+        name: nga-runner@1
+
+    - name: start and enable nga runner 2
+      systemd:
+        daemon_reload: yes
+        state: started
+        enabled: yes
+        name: nga-runner@2
 

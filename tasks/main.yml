@@ -14,10 +14,10 @@
         group: "{{nels_galaxy_api_group}}"
 
     - name: Install Dependencies (for kbr-tools)
-      yum:
+      package:
         name:
-          - "gcc"
-          - "postgresql"
+          - postgresql
+          - gcc
         state: present
 
 

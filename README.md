@@ -3,11 +3,6 @@ Role Name
 
 Ansible role for installing nels-galaxy-api (https://www.github.com/usegalaxy-no/nels-galaxy-api/)
 
-**Currently broken do not use**
-
-
-
-
 
 in requirements:
 
@@ -33,17 +28,19 @@ Dependencies
 Example Playbook
 ----------------
 
+Copy or link the directory into the infrastructur playbook role dir infrastructure-playbook/env/common/roles/
+
+Create the nga.yml in env/test (or env/main for production infra)
+
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
     - hosts: galaxyserver
+      vars_files:
+        - secret_group_vars/global.vault
+        - group_vars/global.yml
+        - group_vars/env.yml
+        - group_vars/nga.yml
       become: true
-      vars:
-        galaxy_config_file: /srv/galaxy/config/galaxy.yml
-        nels_galaxy_key: super-secret-key
-        proxy_keys: {'key_for_incoming_proxy1': 'galaxy-1.bioinfo.no',
-                     'key_for_incoming_proxy2': 'galaxy-2.bioinfo.no'}
-
-
       roles:
         - usegalaxy-no.nels-galaxy-api
 

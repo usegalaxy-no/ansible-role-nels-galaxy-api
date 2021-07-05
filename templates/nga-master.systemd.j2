@@ -1,0 +1,16 @@
+[Unit]
+Description=Galaxy-NGA Master Process
+After=galaxy.service
+
+[Service]
+UMask=022
+Type=simple
+User=root
+Group=root
+WorkingDirectory={{ nels_galaxy_api_root }}
+TimeoutStartSec=10
+ExecStart={{ nels_galaxy_api_root }}/venv/bin/python3 {{ nels_galaxy_api_root }}/bin/nels-galaxy-api.py -c {{ nels_galaxy_config }} -l {{ nels_galaxy_api_log_dir }}/nga.log
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

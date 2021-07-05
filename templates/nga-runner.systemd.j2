@@ -1,0 +1,16 @@
+[Unit]
+Description=Galaxy-NGA runner Process %i
+After=galaxy.service nga-master.service
+
+[Service]
+UMask=022
+Type=simple
+User=root
+Group=root
+WorkingDirectory={{ nels_galaxy_api_root }}
+TimeoutStartSec=10
+ExecStart={{ nels_galaxy_api_root }}/venv/bin/python3 {{ nels_galaxy_api_root }}/bin/nga_runner.py -c {{ nels_galaxy_config }} -l {{ nels_galaxy_api_log_dir }}/nga_runner.log
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

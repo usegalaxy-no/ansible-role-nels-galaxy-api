@@ -18,7 +18,7 @@
         name:
           - "gcc"
           - "postgresql"
-        state: latest
+        state: present
 
 
     - name: Git checkout of nels-galaxy-api

@@ -28,11 +28,10 @@ Dependencies
 Example Playbook
 ----------------
 
-Copy or link the directory into the infrastructur playbook role dir infrastructure-playbook/env/common/roles/
+Install the role into the infrastructur playbook role dir infrastructure-playbook/env/common/roles/
 
 Create the nga.yml in env/test (or env/main for production infra)
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
     - hosts: galaxyserver
       vars_files:

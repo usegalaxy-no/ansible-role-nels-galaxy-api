@@ -17,6 +17,7 @@
       package:
         name:
           - "gcc"
+          - "postgresql"
 
     - name: Git checkout of nels-galaxy-api
       git:

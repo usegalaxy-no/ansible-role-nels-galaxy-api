@@ -71,21 +71,21 @@
     - name: start and enable nga master
       systemd:
         daemon_reload: yes
-        start: started
+        state: started
         enabled: yes
         name: nga-master
 
     - name: start and enable nga runner 1
       systemd:
         daemon_reload: yes
-        start: started
+        state: started
         enabled: yes
         name: nga-runner@1
 
     - name: start and enable nga runner 2
       systemd:
         daemon_reload: yes
-        start: started
+        state: started
         enabled: yes
         name: nga-runner@2
 

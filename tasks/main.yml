@@ -64,9 +64,9 @@
         owner: root
         group: root
         mode: 0644
-        with_together:
-          - ['nga-master.systemd.j2', 'nga-runner.systemd.j2']
-          - ['/usr/lib/systemd/system/nga-master.service', '/usr/lib/systemd/system/nga-runner\@.service']
+      with_together:
+        - ['nga-master.systemd.j2', 'nga-runner.systemd.j2']
+        - ['/usr/lib/systemd/system/nga-master.service', '/usr/lib/systemd/system/nga-runner\@.service']
 
     - name: start and enable nga master
       systemd:

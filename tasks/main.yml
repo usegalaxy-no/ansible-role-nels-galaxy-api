@@ -24,6 +24,8 @@
       git:
         repo: 'https://github.com/usegalaxy-no/nels-galaxy-api.git'
         dest: "{{ nels_galaxy_api_root }}"
+        version: "HEAD"
+
 
     - name: create venv in {{ nels_galaxy_api_root }}
       command:
@@ -59,7 +61,7 @@
         dest: "{{ item.1 }}"
         owner: root
         group: root
-        mode: 644
+        mode: 0644
         with_together:
           - ['nga-master.systemd.j2', 'nga-runner.systemd.j2']
           - ['/usr/lib/systemd/system/nga-master.service', '/usr/lib/systemd/system/nga-runner\@.service']

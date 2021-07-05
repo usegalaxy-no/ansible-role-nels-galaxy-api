@@ -15,10 +15,11 @@
 
     - name: Install Dependencies (for kbr-tools)
       package:
-        name: "{{ item }}"
-        with_items:
+        name:
           - "gcc"
           - "postgresql"
+        state: latest
+
 
     - name: Git checkout of nels-galaxy-api
       git:

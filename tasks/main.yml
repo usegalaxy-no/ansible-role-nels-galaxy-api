@@ -52,7 +52,7 @@
     - name: Create config file from template
       template:
         src: templates/nga-server.json.j2
-        dest: "{{  nels_galaxy_api_root }}/nga-server.json"
+        dest: "{{  nels_galaxy_api_root }}/{{ nels_galaxy_config}}"
         owner: root
         group: root
         mode: '0644'

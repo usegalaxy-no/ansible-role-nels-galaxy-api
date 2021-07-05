@@ -53,8 +53,8 @@
 
     - name: copy systemd unit files
       template:
-        src: {{ item.0 }}
-        dest: {{ item.1 }}
+        src: "{{ item.0 }}"
+        dest: "{{ item.1 }}"
         owner: root
         group: root
         mode: 644

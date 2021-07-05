@@ -16,7 +16,7 @@
     - name: Install Dependencies (for kbr-tools)
       package:
         name:
-          - postgresql
+          - postgresql.x86_64
           - gcc
         state: present
 

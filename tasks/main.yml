@@ -24,7 +24,7 @@
       git:
         repo: 'https://github.com/usegalaxy-no/nels-galaxy-api.git'
         dest: "{{ nels_galaxy_api_root }}"
-        version: "HEAD"
+        version: master
 
 
     - name: create venv in {{ nels_galaxy_api_root }}

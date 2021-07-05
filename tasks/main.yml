@@ -15,7 +15,8 @@
 
     - name: Install Dependencies (for kbr-tools)
       package:
-        name:
+        name: "{{ item }}"
+        with_items:
           - "gcc"
           - "postgresql"
 

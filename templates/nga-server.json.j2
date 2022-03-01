@@ -1,27 +1,53 @@
+#{
+#  "galaxy_config": "{{galaxy_config_file_location}}",
+#  "id": "{{nga_master_id}}",
+#  "key": "{{nga_master_key}}",
+#  "port": "{{nels_galaxy_api_port}}",
+#  "galaxy_url": "{{nga_master_galaxy_url}}",
+#  "master_url": "{{nga_master_url}}",
+#  "proxy_key": "{{nga_master_proxy_key}}",
+#
+#  "tos_server": true,
+#  "grace_period": 14,
+#  "master": true,
+#
+#  "instances": {{nga_instance}},
+#
+#  "nels_storage_client_key": "{{nels_storage_client_key}}",
+#  "nels_storage_client_secret": "{{nels_storage_client_secret}}",
+#  "nels_url": "{{nels_url}}",
+#  "nels_storage_url": "{{nels_storage_url}}",
+#
+#  "mq_uri": "{{nga_rabbitmq}}",
+#
+#  "sleep_time": 30,
+#  "tmp_dir": "{{nga_tmp_dir}}"
+#}
+
 {
-  "galaxy_config": "{{galaxy_config_file_location}}",
-  "id": "{{nga_master_id}}",
-  "key": "{{nga_master_key}}",
-  "port": "{{nels_galaxy_api_port}}",
-  "galaxy_url": "{{nga_master_galaxy_url}}",
-  "master_url": "{{nga_master_url}}",
-  "proxy_key": "{{nga_master_proxy_key}}",
+  "nga_master_url": "{{ nga_master_url }}",
+  "nga_local_port": "{{ nga_local_port }}",
+
+  "nga_id": "{{ nga_master_id }}",
+  "nga_name": "{{ nga_name }}",
+  "nga_api_token": "{{ nga_api_token }}",
+  "nga_tmp_dir": "{{ nels_galaxy_tmp_dirr }}",
+  "nga_runner_sleep_time": 15,
 
   "tos_server": true,
-  "grace_period": 14,
-  "master": true,
+  "tos_grace_period": 14,
+  "galaxy_url": "{{ nga_master_galaxy_url }}",
+  "galaxy_admin_api_key": "{{ nga_galaxy_admin_api_key }}",
+  "galaxy_config_file": "{{ galaxy_config_file_location }}",
 
-  "instances": {{nga_instance}},
+  "mq_uri": "{{ mq_uri }}",
 
-  "nels_storage_client_key": "{{nels_storage_client_key}}",
-  "nels_storage_client_secret": "{{nels_storage_client_secret}}",
-  "nels_url": "{{nels_url}}",
-  "nels_storage_url": "{{nels_storage_url}}",
+  "nels_url": "{{ nels_url }}",
+  "nels_storage_url": "{{ nels_storage_url }}",
+  "nels_storage_client_key": "{{ nels_storage_client_key }}",
+  "nels_storage_client_secret": "{{ nels_storage_client_key_secret }}",
 
-  "mq_uri": "{{nga_rabbitmq}}",
-
-  "sleep_time": 30,
-  "tmp_dir": "{{nga_tmp_dir}}"
+  "contact_email": "{{ nga_contact_email }}",
+  "max_exports": "{{ nga_max_exports }}",
+  "min_free_space": "{{nga_min_free_space }}"
 }
-
-

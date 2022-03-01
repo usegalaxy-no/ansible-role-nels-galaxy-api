@@ -25,20 +25,20 @@
     - name: Git checkout of nels-galaxy-api
       git:
         repo: 'https://github.com/usegalaxy-no/nels-galaxy-api.git'
-        dest: "{{ nels_galaxy_api_root }}"
+        dest: "{{ nga_root }}"
         version: master
 
 
-    - name: create venv in {{ nels_galaxy_api_root }}
+    - name: create venv in {{ nga_root }}
       command:
-        chdir: "{{  nels_galaxy_api_root }}"
+        chdir: "{{  nga_root }}"
         cmd: python3 -m venv venv
-        creates: "{{  nels_galaxy_api_root }}/venv"
+        creates: "{{  nga_root }}/venv"
 
     - name: Install specified python requirements for nels-galaxy-api
       pip:
-        requirements: "{{  nels_galaxy_api_root }}/requirements.txt"
-        virtualenv: "{{  nels_galaxy_api_root }}/venv"
+        requirements: "{{  nga_root }}/requirements.txt"
+        virtualenv: "{{  nga_root }}/venv"
 
     - name: setup log dir for nels-galaxy-api
       file:
@@ -52,10 +52,11 @@
     - name: Create config file from template
       template:
         src: templates/nga-server.json.j2
-        dest: "{{  nels_galaxy_api_root }}/{{ nels_galaxy_config}}"
+        dest: "{{  nga_configdir }}/{{ nels_galaxy_config}}"
         owner: root
         group: root
         mode: '0644'
+        backup: True
 
     - name: copy systemd unit files
       template:

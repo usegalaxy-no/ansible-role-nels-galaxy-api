@@ -3,6 +3,8 @@
 nels_galaxy_api_user: galaxy
 nels_galaxy_api_group: galaxy
 nels_galaxy_api_root: /srv/nels-galaxy-api
+nga_root: /srv/nga
+nga_configdir: "{{ nga_root }}/configs"
 nels_galaxy_config: nga-server.json
 nels_galaxy_tmp_dir: "/srv/tmp/"
 nels_galaxy_api_port: 8008
@@ -10,7 +12,6 @@ nels_galaxy_api_log_dir: /var/log/nels-galaxy-api
 nels_galaxy_api_runners: 2
 galaxy_config_file_location: "/srv/galaxy/config/galaxy.yml"
 nga_tmp_dir: /srv/tmp/
-
 
 # Need to set and is generally sat elsewhere in the usegalxy-no playbooks:
 #"nels_storage_client_key":

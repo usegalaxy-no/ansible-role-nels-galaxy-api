@@ -3,13 +3,10 @@ ansible-role-nels-galaxy-api
 
 Ansible role for installing nels-galaxy-api (<https://www.github.com/usegalaxy-no/nels-galaxy-api/>)
 
-in requirements:
+included in https://github.com/usegalaxy-no/infrastructure-playbook/blob/master/env/common/requirements.yml:
 
     - src: https://github.com/usegalaxy-no/ansible-role-nels-galaxy-api.git
       name: usegalaxy-no.nels-galaxy-api
-
-Requirements
-------------
 
 Role Variables
 --------------

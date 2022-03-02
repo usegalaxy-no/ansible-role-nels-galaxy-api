@@ -1,4 +1,4 @@
-Role Name
+ansible-role-nels-galaxy-api
 =========
 
 Ansible role for installing nels-galaxy-api (<https://www.github.com/usegalaxy-no/nels-galaxy-api/>)

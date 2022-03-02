@@ -33,9 +33,10 @@ Usage
 
 1. checkout the infrastucture-playbook
 2. follow the instructions <https://usegalaxy-no.readthedocs.io/en/latest/deployment.html>
-3. the nga role is included in the requirements.yml and will be installed by ansible-galaxy
-4. go to the env folder (main or test) and run ansible-playbook nga.yml
-5. nga.yml checks out the nels-galaxy-api and installs it
+3. the nga role is included in the requirements.yml and will be installed by ansible-galaxy.
+   Step is included in the infrastucture doc.
+4. go to the env folder (main or test) and run "ansible-playbook nga.yml"
+   nga.yml checks out the nels-galaxy-api and installs it
 
 Example Playbook
 ----------------

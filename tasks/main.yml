@@ -13,7 +13,7 @@
         name: "{{nels_galaxy_api_user}}"
         group: "{{nels_galaxy_api_group}}"
 
-    - name: Install Dependencies (for kbr-tools)
+    - name: Install Dependencies
       package:
         name:
           - postgresql.x86_64
@@ -24,7 +24,7 @@
 
     - name: Git checkout of nels-galaxy-api
       git:
-        repo: 'https://github.com/usegalaxy-no/nels-galaxy-api.git'
+        repo: 'git@git.app.uib.no:cbu-dev/nga.git'
         dest: "{{ nga_root }}"
         version: master
 

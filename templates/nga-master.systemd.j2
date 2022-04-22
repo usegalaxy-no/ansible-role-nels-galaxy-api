@@ -9,7 +9,7 @@ User=root
 Group=root
 WorkingDirectory={{ nga_root }}
 TimeoutStartSec=10
-ExecStart={{ nga_root }}/venv/bin/python3 {{ nga_root }}/nga_master_api.py -ll 4 -c {{ nga_configdir }}/{{ nels_galaxy_config }} -l {{ nels_galaxy_api_log_dir }}/nga_master_api.log
+ExecStart={{ nga_root }}/venv/bin/python3 {{ nga_root }}/nga_master_api.py -ll 4 -c {{ nga_configdir }}/{{ nels_galaxy_config }} -l {{ nels_galaxy_api_log_dir }}/nga_master_api.log fg
 Restart=always
 
 [Install]

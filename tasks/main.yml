@@ -26,6 +26,7 @@
       git:
         repo: 'git@git.app.uib.no:cbu-dev/nga.git'
         dest: "{{ nga_root }}"
+        force: yes
         version: master
 
 

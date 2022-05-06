@@ -1,9 +1,11 @@
 ansible-role-nels-galaxy-api
 =========
 
-Ansible role for installing nels-galaxy-api (<https://www.github.com/usegalaxy-no/nels-galaxy-api/>)
+Ansible role for installing nels-galaxy-api (NGA).
 
-included in https://github.com/usegalaxy-no/infrastructure-playbook/blob/master/env/common/requirements.yml:
+NGA new versions are currently hosted at UiB GitLab <https://git.app.uib.no/cbu-dev/nga>. It was formerly hosted in [GitHub](https://www.github.com/usegalaxy-no/nels-galaxy-api/). This version is **obsolete**.
+
+NGA is included in https://github.com/usegalaxy-no/infrastructure-playbook/blob/master/env/common/requirements.yml:
 
     - src: https://github.com/usegalaxy-no/ansible-role-nels-galaxy-api.git
       name: usegalaxy-no.nels-galaxy-api
@@ -20,20 +22,20 @@ Variables are defined in:
 Dependencies
 ------------
 
-- usegalaxy infrastructure playbook <https://github.com/usegalaxy-no/infrastructure-playbook>
-- nels galaxy api <https://github.com/usegalaxy-no/nels-galaxy-api.git>
+- usegalaxy infrastructure playbook: <https://github.com/usegalaxy-no/infrastructure-playbook>
+- NGA:  <https://git.app.uib.no/cbu-dev/nga>. Please note that previous NGA version hosted in [GitHub](https://www.github.com/usegalaxy-no/nels-galaxy-api/) is **obsolete** and must not be used anymore.
 - ansible
-- root access to the main nodes uesgalaxy.no (test or prod)
+- root access to the main nodes usegalaxy.no (test or prod)
 
 Usage
 ------------
 
-1. checkout the infrastucture-playbook
-2. follow the instructions <https://usegalaxy-no.readthedocs.io/en/latest/deployment.html>
-3. the nga role is included in the requirements.yml and will be installed by ansible-galaxy.
-   Step is included in the infrastucture doc.
-4. go to the env folder (main or test) and run "ansible-playbook nga.yml"
-   nga.yml checks out the nels-galaxy-api and installs it
+1. Checkout the infrastucture-playbook
+2. Follow the instructions <https://usegalaxy-no.readthedocs.io/en/latest/deployment.html>
+3. The NGA role is included in the requirements.yml and will be installed by ansible-galaxy.
+   Step is included in the infrastructure doc.
+4. Go to the env folder (main or test) and run "ansible-playbook nga.yml"
+   nga.yml checks out the NGA and installs it.
 
 Example Playbook
 ----------------

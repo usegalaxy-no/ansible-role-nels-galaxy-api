@@ -67,8 +67,8 @@
         group: root
         mode: 0644
       with_together:
-        - ['nga-master.systemd.j2', 'nga-runner.systemd.j2']
-        - ['/usr/lib/systemd/system/nga-master.service', '/usr/lib/systemd/system/nga-runner@.service']
+        - ['nga-master.systemd.j2']
+        - ['/usr/lib/systemd/system/nga-master.service']
 
     - name: start and enable nga master
       systemd:
@@ -76,18 +76,3 @@
         state: started
         enabled: yes
         name: nga-master
-
-    - name: start and enable nga runner 1
-      systemd:
-        daemon_reload: yes
-        state: started
-        enabled: yes
-        name: nga-runner@1
-
-    - name: start and enable nga runner 2
-      systemd:
-        daemon_reload: yes
-        state: started
-        enabled: yes
-        name: nga-runner@2
-

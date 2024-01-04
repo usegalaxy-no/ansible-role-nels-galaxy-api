@@ -9,7 +9,6 @@ nels_galaxy_config: nga-server.json
 nels_galaxy_tmp_dir: "/srv/tmp/"
 nels_galaxy_api_port: 8008
 nels_galaxy_api_log_dir: /var/log/nga
-nels_galaxy_api_runners: 2
 galaxy_config_file_location: "/srv/galaxy/config/galaxy.yml"
 nga_tmp_dir: /srv/tmp/
 
